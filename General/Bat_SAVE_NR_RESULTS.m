@@ -1,5 +1,6 @@
 %%
-top = dir('/home/hong/BNR/BPC_NR2.0.0_for_RTL0504/BPC_NR2.0.0_for_RTL/deploy/PART2/');
+% ---- 对文件夹及其子文件夹里面的文件进行遍历处理 ---- %　
+top = dir('/home/hong/BNR/BPC_NR2.0.0_for_RTL0504/NR2.0.0_FIX/deploy/outputs/');
 leng_top = length(top);
 for fold_id = 1:leng_top
     if strcmp(top(fold_id).name, '.') || strcmp(top(fold_id).name, '..')
@@ -22,7 +23,14 @@ for fold_id = 1:leng_top
         disp(fullPNG_name);
 % 
         denoised = readmatrix(fullTXT_name);
-        NR_Raw_demosaiced = demosaic(uint16(65535*denoised/1023),'bggr');
+        % --- right method --- %
+%       denoised = double(denoised)/1023;
+%       NR_Raw_demosaiced = demosaic(uint16(65535*denoised/1023),'bggr');
+        % --- to show method --- %
+        basic_estimation_demosaic = demosaic(uint16(denoised),'bggr');
+        temp = im2double(basic_estimation_demosaic);
+        NR_Raw_demosaiced = uint8(temp*65535);
+
         % gray bayer to color bayer %
 %         color_bayer_denoised = zeros(size(NR_Raw_demosaiced));
 %         color_bayer_denoised_r = color_bayer_denoised(:,:,1);
@@ -36,13 +44,16 @@ for fold_id = 1:leng_top
 %         color_bayer_denoised = cat(3,color_bayer_denoised_r,color_bayer_denoised_g,color_bayer_denoised_b);
         % figure(3),imshow(uint8(color_bayer_denoised)),title('denoised bayer fSigma 16 win 1 sv4 sh7 before 3D');
         % figure(43),imshow(uint8(255*double(NR_Raw_demosaiced)./65535)),title('denoise demosaiced NR_in_C8490_TL84_30LUX_ISO6400_Chart fSigma 16 win 1 sv4 sh7 before');
-          imwrite(uint8(255*double(NR_Raw_demosaiced)./65535),fullPNG_name);
+          
+        
+%         imwrite(uint8(255*double(NR_Raw_demosaiced)./65535),fullPNG_name);
+          imwrite(NR_Raw_demosaiced,fullPNG_name);
 
     end
 
 end
 %%
-%%
+
 function Bat_Gain8
     clear;
     file_path = '/home/hong/QIC-Remosaic/Matlab/HongChow-Remosaic_Hong_Matlab2.0/NR_ISO_RESULTS/LUX30ISO200/';

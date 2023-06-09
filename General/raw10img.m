@@ -1,4 +1,4 @@
-function rawimg = raw10img(input)
+function rawimg = raw10img(input,width,height)
 
 % width = 1920; 
 % height = 1080; 
@@ -15,9 +15,11 @@ function rawimg = raw10img(input)
 % height = 1200; 
 
 
-width = 4656; 
-height = 3504;% 8M
-
+% width = 4656; 
+% height = 3504;% 8M
+% 
+% width=3264;
+% height=2448;
 
 width2 = width / 4 * 5;
 input = reshape(input, width2, height);
