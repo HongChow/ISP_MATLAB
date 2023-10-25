@@ -1,4 +1,4 @@
- fid = fopen('pRaw10_QIC.raw');
+fid = fopen('pRaw10_QIC.raw');
 input = fread(fid,'uint16','ieee-le');
 quard_bayer = reshape(input,[4656,3504]);
 quard_bayer = quard_bayer';

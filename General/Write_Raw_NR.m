@@ -2,16 +2,27 @@
 clc;
 close all;
 %fid = fopen('pRaw10_QIC.raw');
-file = 'nr_float_fSigma_32_win_1_sv4_sh19.txtNR_in_C_3264_2448_1.txt';
+file = '../Inputs/BPC_NR2.0.01_0220_fix_Level_25_Depth_64_win1_sv4_sh15_eroded_NRBPC_3264_2448_2_tmp2.txt';
 denoised = readmatrix(file);
 NR_Raw_demosaiced = demosaic(uint16(65535*denoised/1023),'bggr');
 NR_Raw_demosaiced_float = double(NR_Raw_demosaiced)./65535;
 
-figure,imshow(NR_Raw_demosaiced_float*4);
-imwrite(NR_Raw_demosaiced_float*4,'nr_float_fSigma_32_win_1_sv4_sh19.txtNR_in_C_3264_2448_1.bmp')
+figure,imshow(NR_Raw_demosaiced_float);
+imwrite(NR_Raw_demosaiced_float,'BPC_NR2.0.01_eroded_NRBPC_3264_2448_2_tmp2.bmp');
+%%
+clc;
+close all;
+%fid = fopen('pRaw10_QIC.raw');
+file = '../Inputs/BPC_NR2.0.01_0220_fix_Level_25_Depth_64_win1_sv4_sh15_eroded_NRBPC_3264_2448_2_0626_3.txt';
+denoised = readmatrix(file);
+NR_Raw_demosaiced = demosaic(uint16(65535*denoised/1023),'bggr');
+NR_Raw_demosaiced_float = double(NR_Raw_demosaiced)./65535;
+
+figure,imshow(NR_Raw_demosaiced_float);
+imwrite(NR_Raw_demosaiced_float,'BPC_NR2.0.01_eroded_NRBPC_3264_2448_2_0626_3.bmp');
 %%
 % ------------ different new test data for ISO ---------------- %
- denoised_file_name = '/home/hong/BNR/BPC_NR2.0.0_for_RTL0504/BPC_NR2.0.0_for_RTL/deploy/BPC_NR2.0.01_0220_fix_Level_25_Depth_12_win1_sv4_sh15_C8490_TL84_500LUX_ISO800_Chart.txt';
+ denoised_file_name = '/home/h/DataDisk/ISP/BNR/NR2.0.0_FIX_20230728/deploy/outputs/BPC_NR2.0.01_0220_fix_Level_25_Depth_24_win1_sv2_sh19_C8490_TL84_500LUX_ISO800_Chart.txt';
 denoised = readmatrix(denoised_file_name);
 std(denoised(:))
 NR_Raw_demosaiced = demosaic(uint16(65535*denoised/1023),'bggr');
@@ -28,8 +39,8 @@ NR_Raw_demosaiced = demosaic(uint16(65535*denoised/1023),'bggr');
 % color_bayer_denoised_b(1:2:end,1:2:end) = denoised(1:2:end,1:2:end);
 % color_bayer_denoised = cat(3,color_bayer_denoised_r,color_bayer_denoised_g,color_bayer_denoised_b);
 % figure(3),imshow(uint8(color_bayer_denoised)),title('denoised bayer fSigma 16 win 1 sv4 sh7 before 3D');
-figure(42),imshow(uint8(255*double(NR_Raw_demosaiced)./65535)),title('denoise demosaiced C8490 TL84 500LUX ISO800 Chart fSigma24 win 1 sv1 sh1 after');
-imwrite(uint8(255*double(NR_Raw_demosaiced)./65535),'BPC_NR2.0.01_0220_fix_Level_25_Depth_12_win1_sv4_sh15_C8490_TL84_30LUX_ISO200_Chart.png');
+figure(42),imshow(uint8(255*double(NR_Raw_demosaiced)./65535)),title('BPC_NR2.0.01_0220_fix_Level_25_Depth_24_win1_sv2_sh19_C8490_TL84_500LUX_ISO800_Chart 0731');
+imwrite(uint8(255*double(NR_Raw_demosaiced)./65535),'BPC_NR2.0.01_0220_fix_Level_25_Depth_24_win1_sv2_sh19_C8490_TL84_500LUX_ISO800_Chart_0731.png');
 %%
 % ------------ different new test data for ISO ---------------- %
 noisy_file_name = '/home/hong/BNR/BPC_NR2.0.0_for_RTL0504/BPC_NR2.0.0_for_RTL/deploy/C8490_TL84_500LUX_ISO800_Chart.txt';

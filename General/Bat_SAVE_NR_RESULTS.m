@@ -1,6 +1,6 @@
-%%
-% ---- 对文件夹及其子文件夹里面的文件进行遍历处理 ---- %　
-top = dir('/home/hong/BNR/BPC_NR2.0.0_for_RTL0504/NR2.0.0_FIX/deploy/outputs/');
+
+%%  ---- 对文件夹及其子文件夹里面的文件进行遍历处理 ---- %　
+top = dir('/home/h/DataDisk/ISP/BNR/NR2.0.0_FIX_20230905/Bat_Test/outputs_15/');
 leng_top = length(top);
 for fold_id = 1:leng_top
     if strcmp(top(fold_id).name, '.') || strcmp(top(fold_id).name, '..')
@@ -52,7 +52,8 @@ for fold_id = 1:leng_top
     end
 
 end
-%%
+%% -----------------
+
 
 function Bat_Gain8
     clear;
